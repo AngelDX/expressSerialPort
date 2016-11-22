@@ -1,0 +1,25 @@
+{
+  "name": "msnserialport3",
+  "version": "1.0.0",
+  "description": "Envio de mensajes a celulares mediante Moden USb",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.5.1",
+    "serialport": "^4.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelDX/expressSerialPort.git"
+  },
+  "author": "Ing. Angel Rosendo Condori Coaquira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelDX/expressSerialPort/issues"
+  },
+  "homepage": "https://github.com/AngelDX/expressSerialPort#readme"
+}
