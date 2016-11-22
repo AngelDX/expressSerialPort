@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html lang="en" ng-app="mensajeria">  
+<head>  
+  <meta charset="UTF-8">
+  <title>MSN SOCKETS</title>
+  <script src="socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="angular-material/angular-material.min.css">
+  <link rel="stylesheet" type="text/css" href="angular-material-icons/angular-material-icons.css">
+  <link rel="stylesheet" href="angeldx.css">
+</head>  
+<body ng-controller="CtrlMensaje">
+	<header>
+		<md-toolbar>
+	        <div class="md-toolbar-tools">
+	            SiSDomótica
+	            <span flex></span>
+	            <md-button class="md-icon-button" aria-label="Iniciar Sesión">
+	                <ng-md-icon icon="login" style="fill: #abcdef" size="28"></ng-md-icon>
+	                <md-tooltip md-delay="1000" md-autohide="true">Iniciar Sesión</md-tooltip>
+	            </md-button>
+	        </div>
+	    </md-toolbar>
+    </header>
+    <section>
+	  <div class="contenedor">    
+		<h1 class="text-center">Envio de mensajes de texto</h1>
+
+		<div layout="column" layout-padding ng-cloak class="frmensaje">
+		  <form ng-submit="addMessage()"> 
+			<div layout="column">
+			  <div flex>
+			  	<md-input-container md-no-float >
+				    <ng-md-icon icon="call" style="fill:purple" size="28"></ng-md-icon>
+				    <input ng-model="celular" type="text" placeholder="Phone Number" ng-required="true" md-select-on-focus>
+		    	</md-input-container>
+			  </div>
+			  <div flex>
+			  	<md-input-container md-no-float >
+			        <label id="mensaje">Message</label>
+			        <ng-md-icon icon="email" style="fill:purple" size="28"></ng-md-icon>
+			        <textarea ng-model="mensaje" md-maxlength="150" rows="5" ng-required="true"></textarea>
+			    </md-input-container>
+			  </div>
+			  <div class="flex">
+			  	<md-input-container>
+					<md-button class="md-raised md-primary" type='submit'>Enviar</md-button>
+			    </md-input-container>
+			    {{resultado}}
+			  </div>
+			</div>
+		  </form>
+		</div>
+    </div>
+</section>
+<footer>
+  <p>&copy; Ing. Angel Rosendo Condori Coaquira &middot; <a href="http://juliacasoft.com">Privacy</a> &middot;<a href="#">Terms</a></p>
+</footer>
+	<script src="angular/angular.min.js"></script>
+	<script src="angular-animate/angular-animate.min.js"></script>
+	<script src="angular-aria/angular-aria.min.js"></script>
+	<script src="angular-messages/angular-messages.min.js"></script>
+	<script src="angular-material/angular-material.min.js"></script>
+	<script src="angular-material-icons/angular-material-icons.min.js"></script>
+</body>  
+</html>  
+  <script>
+var socket = io.connect('http://localhost:8000', { 'forceNew': true }); 
+
+angular.module('mensajeria', ['ngMaterial','ngMdIcons'])
+  .controller('CtrlMensaje', function($scope,$http) {
+  	
+  $scope.addMessage=function(){
+  	 socket.emit('new-message',$scope.celular,$scope.mensaje);
+  	 $scope.resultado="enviando mensaje...";
+  };
+
+  });
+
+  </script>
